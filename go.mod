@@ -1,3 +1,3 @@
-module github.com/viza/cryptography/num
+module github.com/viza/cryptography
 
 go 1.20
