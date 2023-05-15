@@ -33,7 +33,7 @@ func (z *Nat) SetHex(hex string) (*Nat, error) {
 	return z, nil
 }
 
-func GetHex(data []byte) string {
+func (z *Nat) GetHex(data []byte) string {
 	encodedString := hex.EncodeToString(data)
 	return encodedString
 }

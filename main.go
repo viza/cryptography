@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/hex"
 	"fmt"
 
 	"github.com/viza/cryptography/num"
@@ -8,25 +9,31 @@ import (
 
 func main() {
 
-	//byteArr, err := num.SetHex("51bf608414ad5726a3c1bec098f77b1b54ffb2787f8d528a74c1d7fde6470ea4")
-	//if err != nil {
-	//	panic("Eror string")
-	//} else {
-	//	fmt.Printf("Array of bytes(hex): % x\n", byteArr)
-	//	fmt.Printf("Array of bytes(bin): % b\n", byteArr)
-	//}
-	//var res num.Nat
-	//(byteArr)
+	number := num.Nat{}
+	var n, n2 *num.Nat
 
-	//str := num.GetHex(byteArr)
-	//fmt.Printf("Hex string: 0x% s\n", str)
+	decodedByteArray, err := hex.DecodeString("36f028580bb02cc8272a9a020f4200e346e276ae664e45ee80745574e2f5ab80")
+	if err != nil {
+		fmt.Println("Unable to convert hex to byte ", err)
+	} else {
+		n = number.SetBytes(decodedByteArray)
+		n.SetHex(string(decodedByteArray))
+		fmt.Println(n)
+	}
 
-	byteArray := []byte("1234567890")
-	fmt.Println("byteArray: ", byteArray)
+	decodedByteArray2, err := hex.DecodeString("70983d692f648185febe6d6fa607630ae68649f7e6fc45b94680096c06e4fadb")
+	if err != nil {
+		fmt.Println("Unable to convert hex to byte ", err)
+	} else {
+		n2 = number.SetBytes(decodedByteArray2)
+		n.SetHex(string(decodedByteArray2))
+		fmt.Println(n2)
+	}
 
-	num.GetHex(byteArray)
+	res2, err := number.Inv(n, n2)
+	fmt.Println(res2, err)
 
-	//num.SetBytes(byteArray)
-	num.SetHex("51bf608414ad5726a3c1bec098f77b1b54ffb2787f8d528a74c1d7fde6470ea4")
-
+	res, _ := number.Add(n, n2, -1)
+	fmt.Println(res)
+	fmt.Printf("%p\n", res)
 }
